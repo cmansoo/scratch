@@ -21,3 +21,15 @@ def bubble_sort(alist):
 
 
 print(f'sorted: {bubble_sort(alist)}')
+
+# using tuple unpacking
+def bubble_sort2(alist):
+    size = len(alist)
+    for i in range(size-1):
+        for j in range(0, size-i-1):
+            if alist[j] > alist[j+1]:
+                (alist[j], alist[j+1]) = (alist[j+1],alist[j])
+
+    return alist
+
+print(f'sorted: {bubble_sort2(alist)}')
