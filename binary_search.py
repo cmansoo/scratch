@@ -30,7 +30,7 @@ def binary_search(array, target): # returns the index of target value in an arra
             right = mid + 1
         else:
             left = mid - 1
-
+    return None
 
 guess_index = binary_search(alist, answer)
 guess = alist[guess_index]
