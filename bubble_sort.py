@@ -12,7 +12,7 @@ print(f'unsorted: {alist}')
 def bubble_sort(alist):
     size = len(alist)
     for i in range(size-1):
-        for j in range(0, size-1):
+        for j in range(0, size-i-1):
             if alist[j] > alist[j+1]:
                 temp = alist[j]
                 alist[j] = alist[j+1]
