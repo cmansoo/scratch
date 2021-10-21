@@ -1,7 +1,7 @@
 def roman_to_int(s):
     '''
-    type = str
-    
+    :s type = str
+    :rtype = int
     '''
 
     romans = {
