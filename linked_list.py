@@ -11,11 +11,14 @@ class Linked_list:
     def __init__(self):
         self.head = None
 
-    def print_list(self):
-        temp = self.head
-        while temp:
-            print(temp.data)
-            temp = temp.next
+    def __repr__(self):
+        node = self.head
+        nodes = []
+        while node is not None:
+            nodes.append(node.data)
+            node = node.next
+        nodes.append('None')
+        return ' -> '.join(nodes)
 
 
 def main():
@@ -28,7 +31,7 @@ def main():
     linked_list.head.next = second
     second.next = third
 
-    linked_list.print_list()
+    print(linked_list)
 
 
 if __name__ == '__main__':
