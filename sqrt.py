@@ -10,6 +10,7 @@
 def sq_rt(n):
     tol = 0.0000001
     x = n
+    assert n > 0
     while True:
         root = 0.5 * (x + (n / x))
         
