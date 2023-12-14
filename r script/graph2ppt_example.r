@@ -22,7 +22,7 @@ doc <- doc |> add_slide(layout = "Title and Content", master = "Office Theme")
 doc <- doc |> ph_with(value = graph_vec, location = ph_location_fullsize())
 
 # export to pptx
-base::print(doc, target = "C:/Users/A216095/Documents/GitHub/refMHIF-IIRq/demo code/km_only.pptx")
+base::print(doc, target = "km_only.pptx")
 
 
 ## with risk table
@@ -41,20 +41,20 @@ doc2 <- doc2 |> add_slide(layout = "Title and Content", master = "Office Theme")
 doc2 <- doc2 |> ph_with(value = graph_vec2, location = ph_location_fullsize())
 
 # export to pptx
-base::print(doc2, target = "C:/Users/A216095/Documents/GitHub/refMHIF-IIRq/demo code/with_risk_tbl.pptx")
+base::print(doc2, target = "with_risk_tbl.pptx")
 
 
 ### you can use export::graph2ppt for simple ggplot obj
 ### however, km curve throws error, its b/c of blank page
 # p <- ggsurvplot(fit)
 # export::graph2ppt(x = ggsurvplot(fit),
-#                   file = "C:/Users/A216095/Documents/GitHub/refMHIF-IIRq/demo code/graph2_km.pptx")
+#                   file = "graph2_km.pptx")
 
 # you need to get rid of the blank page by setting newpage = F
 export::graph2ppt(x = print(ggsurvplot(fit), newpage = F), 
-                  file = "C:/Users/A216095/Documents/GitHub/refMHIF-IIRq/demo code/graph2_km.pptx")
+                  file = "graph2_km.pptx")
 
 export::graph2ppt(x = print(ggsurvplot(fit, risk.table = T), newpage = F), 
-                  file = "C:/Users/A216095/Documents/GitHub/refMHIF-IIRq/demo code/graph2_risk.pptx")
+                  file = "graph2_risk.pptx")
 
 
