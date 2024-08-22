@@ -43,17 +43,26 @@ lapply(x_split, function(y) {
 # currently doesnt work for sets of numbers, need to fix sequence to set
 # seq(num1, num2) should be set of numbers for [02-4]. i.e. c(0, seq(2,4))
 
-x <- "I6[02-4]1"
+x <- "I6[023-5]1"
 y <- unlist(strsplit(x, ""))
+y
 bracket1_idx <- which(y == "[")
 hyphen_idx <- which(y == "-")
 bracket2_idx <- which(y == "]")
-num1 <- y[hyphen_idx - 1]
-num2 <- y[hyphen_idx + 1]
-substr1 <- y[1:bracket1_idx - 1] |> paste0(collapse="")
+num1 <- y[hyphen_idx-1]
+num2 <- y[hyphen_idx+1]
+substr1 <- y[1:bracket1_idx-1] |> paste0(collapse="")
+substr1
+# nums between bracket1 and num1?
+num1.1 <- y[(bracket1_idx+1):(hyphen_idx-1)]
+num1.1
+
+num2.1 <- y[(hyphen_idx+1):(bracket2_idx-1)]
+num2.1
 
 if(bracket2_idx == length(y)) {
   paste0(substr1, seq(num1, num2))
+  paste0(substr1, num1.1)
 } else {
   substr2 <- y[(bracket2_idx + 1):length(y)] |> paste0(collapse="")
   paste0(substr1, seq(num1, num2), substr2)
