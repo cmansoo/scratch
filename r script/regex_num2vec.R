@@ -15,15 +15,16 @@ x <- c("N17[0-3]", "438[46]", "I6[02-4]1", "V[1-3]71")
 x_split <- strsplit(x, "")
 lapply(x_split, function(y) {
   bracket1_idx <- which(y == "[")
+  hyphen_idx <- which(y == "-")
   bracket2_idx <- which(y == "]")
-  num1 <- y[bracket1_idx + 1]
-  num2 <- y[bracket2_idx - 1]
+  num1 <- y[hyphen_idx - 1]
+  num2 <- y[hyphen_idx + 1]
   substr1 <- y[1:bracket1_idx - 1] |> paste0(collapse="")
   
-  if(bracket2_idx == length(y)) return(paste0(substr1, seq(num1, num2)))
+  if(bracket2_idx == length(y)) paste0(substr1, seq(num1, num2))
   else {
     substr2 <- y[(bracket2_idx + 1):length(y)] |> paste0(collapse="")
-    return(paste0(substr1, seq(num1, num2), substr2))
+    paste0(substr1, seq(num1, num2), substr2)
   }
 })
 
@@ -38,3 +39,23 @@ lapply(x_split, function(y) {
 # 
 # [[4]]
 # [1] "V171" "V271" "V371"
+
+# currently doesnt work for sets of numbers, need to fix sequence to set
+# seq(num1, num2) should be set of numbers for [02-4]. i.e. c(0, seq(2,4))
+
+x <- "I6[02-4]1"
+y <- unlist(strsplit(x, ""))
+bracket1_idx <- which(y == "[")
+hyphen_idx <- which(y == "-")
+bracket2_idx <- which(y == "]")
+num1 <- y[hyphen_idx - 1]
+num2 <- y[hyphen_idx + 1]
+substr1 <- y[1:bracket1_idx - 1] |> paste0(collapse="")
+
+if(bracket2_idx == length(y)) {
+  paste0(substr1, seq(num1, num2))
+} else {
+  substr2 <- y[(bracket2_idx + 1):length(y)] |> paste0(collapse="")
+  paste0(substr1, seq(num1, num2), substr2)
+}
+
