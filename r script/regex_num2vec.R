@@ -11,24 +11,30 @@ newstr
 # [1] "4382" "4383" "4384" "4385" "4386" "4387" "4388" "4389"
 
 # vectors?
-x <- c("N17[0-9]", "438[0-9]", "I6[02-4]1")
+x <- c("N17[0-3]", "438[46]", "I6[02-4]1", "V[1-3]71")
 x_split <- strsplit(x, "")
 lapply(x_split, function(y) {
-  num1 <- y[which(y == "[") + 1]
-  num2 <- y[which(y == "]") - 1]
-  substr1 <- y[1:which(y == "[") - 1] |> paste0(collapse="")
-  substr2 <- y[(which(y == "]")+1):length(y)] |> paste0(collapse="")
-  # return
-  paste0(substr1, seq(num1, num2), substr2)
+  bracket1_idx <- which(y == "[")
+  bracket2_idx <- which(y == "]")
+  num1 <- y[bracket1_idx + 1]
+  num2 <- y[bracket2_idx - 1]
+  substr1 <- y[1:bracket1_idx - 1] |> paste0(collapse="")
+  
+  if(bracket2_idx == length(y)) return(paste0(substr1, seq(num1, num2)))
+  else {
+    substr2 <- y[(bracket2_idx + 1):length(y)] |> paste0(collapse="")
+    return(paste0(substr1, seq(num1, num2), substr2))
+  }
 })
 
 # [[1]]
-# [1] "N170NA]" "N171NA]" "N172NA]" "N173NA]" "N174NA]" "N175NA]" "N176NA]" "N177NA]"
-# [9] "N178NA]" "N179NA]"
+# [1] "N170" "N171" "N172" "N173"
 # 
 # [[2]]
-# [1] "4380NA]" "4381NA]" "4382NA]" "4383NA]" "4384NA]" "4385NA]" "4386NA]" "4387NA]"
-# [9] "4388NA]" "4389NA]"
+# [1] "4384" "4385" "4386"
 # 
 # [[3]]
 # [1] "I601" "I611" "I621" "I631" "I641"
+# 
+# [[4]]
+# [1] "V171" "V271" "V371"
