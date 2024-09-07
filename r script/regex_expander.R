@@ -39,6 +39,7 @@ regex_expander <- function(rex, show_expanded=TRUE){
       sapply(expt, function(p) gsub(pattern=rng, replacement=p, x=rex, fixed=TRUE),
              USE.NAMES=show_expanded)
     } else{
+      warning("The expression ", rex, " does not contain any ranges.")
       rex
     }
   },
@@ -67,4 +68,6 @@ r <- "^W3812$|^405[0-3L-O]$|^N17[04][9FK][0-3]Z$"
 regex_expander(r, show_expanded=FALSE)
 regex_expander(r, show_expanded=TRUE)
 
-
+r <- "^W3812$"
+regex_expander(r, show_expanded = FALSE)
+regex_expander(r, show_expanded = TRUE)
