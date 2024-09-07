@@ -6,7 +6,7 @@
 #' @param rex a regular expression
 #' @param show_expanded if set to TRUE, the resulting vector will show each value in the expanded range as names.
 #' @examples
-#' r <- "^W3812|^405[0-3L-O]|^N17[04][9FK]Z"
+#' r <- "^W3812$|^405[0-3L-O]$|^N17[04][9FK][0-3]Z$"
 #' regex_expander(r)
 regex_expander <- function(rex, show_expanded=TRUE){
   alpha_nums <- c(0:9, letters, LETTERS)
@@ -59,11 +59,12 @@ regex_expander <- function(rex, show_expanded=TRUE){
 }
 
 r <- "^405[0-3L-O]$"
-regex_expander(r, FALSE)
-regex_expander(r, TRUE)
+regex_expander(r, show_expanded=FALSE)
+regex_expander(r, show_expanded=TRUE)
 
 
-r <- "^W3812$|^405[0-3L-O]$|^N17[04][9FK]Z$"
-regex_expander(r, FALSE)
-regex_expander(r, TRUE)
+r <- "^W3812$|^405[0-3L-O]$|^N17[04][9FK][0-3]Z$"
+regex_expander(r, show_expanded=FALSE)
+regex_expander(r, show_expanded=TRUE)
+
 
