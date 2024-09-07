@@ -236,7 +236,7 @@ def regex_expander2(rex, verbose=True):
     rex_split = rex.split("|")
     
     if len(rex_split) == 1:
-        return(single_expander(rex, verbose))
+        return single_expander(rex, verbose)
     
     else:
         result = {r: single_expander(r, verbose) for r in rex_split}
@@ -244,8 +244,8 @@ def regex_expander2(rex, verbose=True):
 
 # test
 # given regex
-# rex = "^N17[04][9FK][0-3]Z$"
-# rex = "^405[0-3L-O]$"
+# r = "^N17[04][9FK][0-3]Z$"
+# r = "^405[0-3L-O]$"
 # r = "02[W04]F[0-4][JK]Z"
 # r = "^W3812$"
 r = "^W3812$|^405[0-3L-O]$|^N17[04][9FK][0-3]Z$"
