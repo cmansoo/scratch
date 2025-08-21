@@ -1,0 +1,36 @@
+# ref: https://stackoverflow.com/a/72501236/16421247
+# sample data
+set.seed(123)
+vec <- c(1:6,NA,NA,NA,NA)
+dat <- data.frame(
+  x1 = sample(vec),
+  y1 = sample(vec)
+)
+for(i in 2:25){
+  dat[paste0("x",i)] <- sample(vec)
+  dat[paste0("y",i)] <- sample(vec)
+}
+dat
+
+
+# coalesce pairs of columns
+library(dplyr)
+dat |> 
+  split.default(
+    f = gsub("x|y", "", names(dat) )
+  ) |>
+  purrr::map(
+    .f=function(x) purrr::exec(coalesce, !!!x)
+  ) |> 
+  bind_cols() |>
+  rename_with(.cols = everything(), .fn=function(x) paste0("z",x))
+
+
+dat |> 
+  split.default(
+    f = gsub("x|y", "", names(dat) )
+  ) |>
+  purrr::map_dfc(
+    .f=function(x) purrr::exec(coalesce, !!!x)
+  ) |> 
+  rename_with(.cols = everything(), .fn=function(x) paste0("z",x))
